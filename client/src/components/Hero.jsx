@@ -19,7 +19,7 @@ const Hero = () => {
             Find a doctor
           </a>
           <a className="btn btn-secondary" href="/login">
-            Try sample login
+            Sign in
           </a>
         </div>
         <div className="hero-metrics">
@@ -27,10 +27,10 @@ const Hero = () => {
             <FaUserMd /> Verified doctors
           </span>
           <span>
-            <FaCalendarCheck /> Status tracking
+            <FaCalendarCheck /> Easy scheduling
           </span>
           <span>
-            <FaBell /> Live notifications
+            <FaBell /> Appointment reminders
           </span>
         </div>
       </div>

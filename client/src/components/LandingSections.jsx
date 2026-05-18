@@ -15,46 +15,46 @@ const steps = [
   {
     icon: <FaSearch />,
     title: "Find a specialist",
-    text: "Search by doctor name or specialty and compare basic visit details.",
+    text: "Browse available doctors by name or specialty and choose the right fit.",
   },
   {
     icon: <FaCalendarCheck />,
     title: "Book the visit",
-    text: "Pick a date and time, then track the request from the appointment page.",
+    text: "Choose a time that works and keep your appointment details in one place.",
   },
   {
     icon: <FaBell />,
     title: "Stay updated",
-    text: "Patients and doctors receive notifications when important actions happen.",
+    text: "Get clear updates when an appointment changes or a visit is completed.",
   },
 ];
 
 const features = [
-  "Patient registration and secure login",
-  "Doctor application and approval workflow",
-  "Admin dashboard for users, doctors, and appointments",
-  "Appointment status tracking",
-  "Profile updates and notification history",
-  "Seeded healthcare data for quick setup",
+  "Book appointments with trusted specialists",
+  "Manage upcoming and completed visits",
+  "Receive important appointment updates",
+  "Keep patient and doctor profiles organized",
+  "Review doctor availability before booking",
+  "Contact the clinic team when help is needed",
 ];
 
 const LandingSections = () => {
   return (
     <>
       <section className="trust-strip">
-        <span>Designed for reliable healthcare appointment operations</span>
-        <strong>Patient flow</strong>
-        <strong>Doctor workflow</strong>
-        <strong>Admin review</strong>
-        <strong>Seeded records</strong>
+        <span>Care that is easier to find, book, and manage</span>
+        <strong>Verified doctors</strong>
+        <strong>Simple booking</strong>
+        <strong>Visit reminders</strong>
+        <strong>Secure profiles</strong>
       </section>
 
       <section className="landing-section workflow-section">
         <div className="section-heading">
           <h2>One clean flow from discovery to follow-up.</h2>
           <p>
-            The project is easy to explain: users book care, doctors manage the
-            appointment, and admins keep the platform trustworthy.
+            CareBridge helps patients find a doctor, reserve a visit, and follow
+            every appointment from request to completion.
           </p>
         </div>
         <div className="workflow-grid">
@@ -72,9 +72,8 @@ const LandingSections = () => {
         <div className="showcase-copy">
           <h2>A complete care workflow in one platform.</h2>
           <p>
-            CareBridge is not just a static frontend. It has roles,
-            protected routes, dashboards, notifications, and appointment data
-            moving through the system.
+            From first search to follow-up notes, the experience stays clear for
+            patients, doctors, and clinic staff.
           </p>
           <div className="feature-list">
             {features.map((feature) => (
@@ -99,8 +98,8 @@ const LandingSections = () => {
           <div className="queue-row">
             <FaUserCheck />
             <div>
-              <strong>Doctor application</strong>
-              <span>Ready for admin review</span>
+              <strong>Specialist availability</strong>
+              <span>Open times ready to book</span>
             </div>
           </div>
           <div className="queue-row">
@@ -130,8 +129,8 @@ const LandingSections = () => {
           </article>
           <article>
             <FaShieldAlt />
-            <h3>Admin</h3>
-            <p>Approve applications, manage users, and supervise platform activity.</p>
+            <h3>Clinic team</h3>
+            <p>Keep appointments, doctors, and patient information organized.</p>
           </article>
         </div>
       </section>
@@ -141,8 +140,8 @@ const LandingSections = () => {
           <FaLock />
           <h2>Privacy-aware and easy to operate.</h2>
           <p>
-            The app supports MongoDB for persistent deployments and includes
-            seeded local records for fast evaluation without external services.
+            CareBridge keeps important visit information in one organized place,
+            so patients and staff can focus on the appointment instead of the admin.
           </p>
         </div>
         <a className="btn" href="/doctors">

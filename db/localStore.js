@@ -168,6 +168,7 @@ const Notification = createModel("notifications");
 
 const sampleUsers = [
   {
+    _id: "user_admin",
     firstname: "Admin",
     lastname: "Manager",
     email: "admin@carebridge.test",
@@ -182,6 +183,7 @@ const sampleUsers = [
     pic: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=256&q=80",
   },
   {
+    _id: "user_patient_maya",
     firstname: "Maya",
     lastname: "Patient",
     email: "patient@carebridge.test",
@@ -196,6 +198,7 @@ const sampleUsers = [
     pic: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&q=80",
   },
   {
+    _id: "user_doctor_youssef",
     firstname: "Youssef",
     lastname: "Bennani",
     email: "doctor@carebridge.test",
@@ -210,6 +213,7 @@ const sampleUsers = [
     pic: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=256&q=80",
   },
   {
+    _id: "user_applicant_sara",
     firstname: "Sara",
     lastname: "Applicant",
     email: "applicant@carebridge.test",
@@ -224,6 +228,7 @@ const sampleUsers = [
     pic: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=256&q=80",
   },
   {
+    _id: "user_patient_omar",
     firstname: "Omar",
     lastname: "Haddad",
     email: "omar.patient@carebridge.test",
@@ -238,6 +243,7 @@ const sampleUsers = [
     pic: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=256&q=80",
   },
   {
+    _id: "user_doctor_leila",
     firstname: "Leila",
     lastname: "Mansouri",
     email: "leila.doctor@carebridge.test",
@@ -252,6 +258,7 @@ const sampleUsers = [
     pic: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=256&q=80",
   },
   {
+    _id: "user_applicant_nadia",
     firstname: "Nadia",
     lastname: "Rahmani",
     email: "nadia.applicant@carebridge.test",
@@ -281,6 +288,7 @@ const seedLocalData = async () => {
 
   await Doctor.create([
     {
+      _id: "doctor_youssef",
       userId: users["doctor@carebridge.test"]._id,
       specialization: "Cardiology",
       experience: 12,
@@ -289,6 +297,7 @@ const seedLocalData = async () => {
       isDoctor: true,
     },
     {
+      _id: "doctor_leila",
       userId: users["leila.doctor@carebridge.test"]._id,
       specialization: "Pediatrics",
       experience: 9,
@@ -297,6 +306,7 @@ const seedLocalData = async () => {
       isDoctor: true,
     },
     {
+      _id: "doctor_applicant_sara",
       userId: users["applicant@carebridge.test"]._id,
       specialization: "Dermatology",
       experience: 6,
@@ -305,6 +315,7 @@ const seedLocalData = async () => {
       isDoctor: false,
     },
     {
+      _id: "doctor_applicant_nadia",
       userId: users["nadia.applicant@carebridge.test"]._id,
       specialization: "Neurology",
       experience: 14,
@@ -323,6 +334,7 @@ const seedLocalData = async () => {
 
   await Appointment.create([
     {
+      _id: "appointment_maya_youssef_today",
       userId: users["patient@carebridge.test"]._id,
       doctorId: users["doctor@carebridge.test"]._id,
       date: isoDate(0),
@@ -332,6 +344,7 @@ const seedLocalData = async () => {
       doctorNote: "",
     },
     {
+      _id: "appointment_omar_leila_tomorrow",
       userId: users["omar.patient@carebridge.test"]._id,
       doctorId: users["leila.doctor@carebridge.test"]._id,
       date: isoDate(1),
@@ -341,6 +354,7 @@ const seedLocalData = async () => {
       doctorNote: "",
     },
     {
+      _id: "appointment_maya_leila_completed",
       userId: users["patient@carebridge.test"]._id,
       doctorId: users["leila.doctor@carebridge.test"]._id,
       date: isoDate(-2),
@@ -350,6 +364,7 @@ const seedLocalData = async () => {
       doctorNote: "Patient recovered well. Continue hydration and return if symptoms change.",
     },
     {
+      _id: "appointment_omar_youssef_future",
       userId: users["omar.patient@carebridge.test"]._id,
       doctorId: users["doctor@carebridge.test"]._id,
       date: isoDate(3),
@@ -362,14 +377,17 @@ const seedLocalData = async () => {
 
   await Notification.create([
     {
+      _id: "notification_patient_upcoming",
       userId: users["patient@carebridge.test"]._id,
       content: "Your upcoming cardiology appointment is scheduled.",
     },
     {
+      _id: "notification_doctor_review",
       userId: users["doctor@carebridge.test"]._id,
       content: "You have appointments waiting for review.",
     },
     {
+      _id: "notification_admin_applications",
       userId: users["admin@carebridge.test"]._id,
       content: "Two doctor applications are ready for admin review.",
     },

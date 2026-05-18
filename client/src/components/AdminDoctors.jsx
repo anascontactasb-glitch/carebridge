@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loading from "./Loading";
@@ -15,14 +15,14 @@ const AdminDoctors = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
 
-  const getAllDoctors = async (e) => {
+  const getAllDoctors = useCallback(async () => {
     try {
       dispatch(setLoading(true));
       const temp = await fetchData(`/doctor/getalldoctors`);
       setDoctors(temp);
       dispatch(setLoading(false));
     } catch (error) {}
-  };
+  }, [dispatch]);
 
   const deleteUser = async (userId) => {
     try {
@@ -53,7 +53,7 @@ const AdminDoctors = () => {
 
   useEffect(() => {
     getAllDoctors();
-  }, []);
+  }, [getAllDoctors]);
 
   return (
     <>

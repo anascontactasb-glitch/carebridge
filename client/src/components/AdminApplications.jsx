@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loading from "./Loading";
@@ -15,14 +15,14 @@ const AdminApplications = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
 
-  const getAllApp = async (e) => {
+  const getAllApp = useCallback(async () => {
     try {
       dispatch(setLoading(true));
       const temp = await fetchData(`/doctor/getnotdoctors`);
       setApplications(temp);
       dispatch(setLoading(false));
     } catch (error) {}
-  };
+  }, [dispatch]);
 
   const acceptUser = async (userId) => {
     try {
@@ -82,7 +82,7 @@ const AdminApplications = () => {
 
   useEffect(() => {
     getAllApp();
-  }, []);
+  }, [getAllApp]);
 
   return (
     <>

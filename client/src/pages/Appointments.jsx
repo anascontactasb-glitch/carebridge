@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Empty from "../components/Empty";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -31,7 +31,7 @@ const Appointments = () => {
     (appointment) => userId === appointment.doctorId?._id
   );
 
-  const getAllAppoint = async (e) => {
+  const getAllAppoint = useCallback(async () => {
     try {
       dispatch(setLoading(true));
       const temp = await fetchData(
@@ -40,11 +40,11 @@ const Appointments = () => {
       setAppointments(temp);
       dispatch(setLoading(false));
     } catch (error) {}
-  };
+  }, [dispatch, userId]);
 
   useEffect(() => {
     getAllAppoint();
-  }, []);
+  }, [getAllAppoint]);
 
   const complete = async (ele) => {
     try {

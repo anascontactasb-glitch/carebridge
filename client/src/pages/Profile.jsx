@@ -10,7 +10,7 @@ import jwt_decode from "jwt-decode";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN || "/api";
 
 function Profile() {
   const { userId } = jwt_decode(localStorage.getItem("token"));

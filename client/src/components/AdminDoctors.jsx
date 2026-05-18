@@ -8,7 +8,7 @@ import Empty from "./Empty";
 import fetchData from "../helper/apiCall";
 import "../styles/user.css";
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN || "/api";
 
 const AdminDoctors = () => {
   const [doctors, setDoctors] = useState([]);

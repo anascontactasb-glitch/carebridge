@@ -60,20 +60,34 @@ const Sidebar = () => {
     <>
       <section className="sidebar-section flex-center">
         <div className="sidebar-container">
+          <div className="sidebar-brand">
+            <span>+</span>
+            <div>
+              <strong>CareBridge</strong>
+              <small>Admin console</small>
+            </div>
+          </div>
           <ul>
             {sidebar.map((ele, i) => {
               return (
                 <li key={i}>
-                  {ele.icon}
-                  <NavLink to={ele.path}>{ele.name}</NavLink>
+                  <NavLink
+                    to={ele.path}
+                    className={({ isActive }) =>
+                      isActive ? "sidebar-link active" : "sidebar-link"
+                    }
+                  >
+                    {ele.icon}
+                    <span>{ele.name}</span>
+                  </NavLink>
                 </li>
               );
             })}
           </ul>
-          <div className="logout-container">
+          <button className="logout-container" type="button" onClick={logoutFunc}>
             <MdLogout />
-            <p onClick={logoutFunc}>Logout</p>
-          </div>
+            <span>Logout</span>
+          </button>
         </div>
       </section>
     </>

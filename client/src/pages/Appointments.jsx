@@ -10,12 +10,26 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/user.css";
+import { FaBell, FaBellSlash } from "react-icons/fa";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
+  const [notes, setNotes] = useState({});
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
   const { userId } = jwt_decode(localStorage.getItem("token"));
+  const pendingCount = appointments.filter(
+    (appointment) => appointment.status !== "Completed"
+  ).length;
+  const completedCount = appointments.filter(
+    (appointment) => appointment.status === "Completed"
+  ).length;
+  const nextAppointment = appointments.find(
+    (appointment) => appointment.status !== "Completed"
+  );
+  const hasDoctorActions = appointments.some(
+    (appointment) => userId === appointment.doctorId?._id
+  );
 
   const getAllAppoint = async (e) => {
     try {
@@ -41,6 +55,7 @@ const Appointments = () => {
             appointid: ele?._id,
             doctorId: ele?.doctorId?._id,
             doctorname: `${ele?.userId?.firstname} ${ele?.userId?.lastname}`,
+            doctorNote: notes[ele?._id] || ele?.doctorNote || "",
           },
           {
             headers: {
@@ -49,12 +64,39 @@ const Appointments = () => {
           }
         ),
         {
-          success: "Appointment booked successfully",
-          error: "Unable to book appointment",
-          loading: "Booking appointment...",
+          success: "Appointment completed",
+          error: "Unable to complete appointment",
+          loading: "Completing appointment...",
         }
       );
 
+      getAllAppoint();
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const updateReminder = async (ele) => {
+    try {
+      await toast.promise(
+        axios.put(
+          "/appointment/reminder",
+          {
+            appointid: ele?._id,
+            reminder: !ele?.reminder,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        ),
+        {
+          success: !ele?.reminder ? "Reminder enabled" : "Reminder disabled",
+          error: "Unable to update reminder",
+          loading: "Updating reminder...",
+        }
+      );
       getAllAppoint();
     } catch (error) {
       return error;
@@ -72,6 +114,28 @@ const Appointments = () => {
 
           {appointments.length > 0 ? (
             <div className="appointments">
+              <div className="appointment-tracker">
+                <article>
+                  <span>Total visits</span>
+                  <strong>{appointments.length}</strong>
+                </article>
+                <article>
+                  <span>Pending</span>
+                  <strong>{pendingCount}</strong>
+                </article>
+                <article>
+                  <span>Completed</span>
+                  <strong>{completedCount}</strong>
+                </article>
+                <article className="next-appointment">
+                  <span>Next appointment</span>
+                  <strong>
+                    {nextAppointment
+                      ? `${nextAppointment.date} at ${nextAppointment.time}`
+                      : "No pending visits"}
+                  </strong>
+                </article>
+              </div>
               <table>
                 <thead>
                   <tr>
@@ -83,7 +147,9 @@ const Appointments = () => {
                     <th>Booking Date</th>
                     <th>Booking Time</th>
                     <th>Status</th>
-                    {userId === appointments[0].doctorId?._id ? (
+                    <th>Reminder</th>
+                    <th>Doctor Note</th>
+                    {hasDoctorActions ? (
                       <th>Action</th>
                     ) : (
                       <></>
@@ -107,7 +173,51 @@ const Appointments = () => {
                         <td>{ele?.time}</td>
                         <td>{ele?.createdAt.split("T")[0]}</td>
                         <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td>
-                        <td>{ele?.status}</td>
+                        <td>
+                          <span
+                            className={`status-pill ${
+                              ele?.status === "Completed" ? "completed" : ""
+                            }`}
+                          >
+                            {ele?.status}
+                          </span>
+                        </td>
+                        <td>
+                          {userId === ele?.userId?._id ? (
+                            <button
+                              type="button"
+                              className={`reminder-toggle ${
+                                ele?.reminder ? "active" : ""
+                              }`}
+                              onClick={() => updateReminder(ele)}
+                            >
+                              {ele?.reminder ? <FaBell /> : <FaBellSlash />}
+                              {ele?.reminder ? "On" : "Off"}
+                            </button>
+                          ) : (
+                            ele?.reminder ? "On" : "Off"
+                          )}
+                        </td>
+                        <td>
+                          {userId === ele?.doctorId?._id &&
+                          ele?.status !== "Completed" ? (
+                            <textarea
+                              className="note-input"
+                              placeholder="Completion note"
+                              value={notes[ele?._id] || ""}
+                              onChange={(event) =>
+                                setNotes({
+                                  ...notes,
+                                  [ele?._id]: event.target.value,
+                                })
+                              }
+                            />
+                          ) : (
+                            <span className="doctor-note">
+                              {ele?.doctorNote || "Pending completion"}
+                            </span>
+                          )}
+                        </td>
                         {userId === ele?.doctorId?._id ? (
                           <td>
                             <button
@@ -120,6 +230,8 @@ const Appointments = () => {
                               Complete
                             </button>
                           </td>
+                        ) : hasDoctorActions ? (
+                          <td>-</td>
                         ) : (
                           <></>
                         )}

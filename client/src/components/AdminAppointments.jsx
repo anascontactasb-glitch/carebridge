@@ -12,6 +12,7 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 const AdminAppointments = () => {
   const [appointments, setAppointments] = useState([]);
+  const [notes, setNotes] = useState({});
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
 
@@ -37,6 +38,7 @@ const AdminAppointments = () => {
             appointid: ele?._id,
             doctorId: ele?.doctorId._id,
             doctorname: `${ele?.userId?.firstname} ${ele?.userId?.lastname}`,
+            doctorNote: notes[ele?._id] || ele?.doctorNote || "",
           },
           {
             headers: {
@@ -45,9 +47,9 @@ const AdminAppointments = () => {
           }
         ),
         {
-          success: "Appointment booked successfully",
-          error: "Unable to book appointment",
-          loading: "Booking appointment...",
+          success: "Appointment completed",
+          error: "Unable to complete appointment",
+          loading: "Completing appointment...",
         }
       );
 
@@ -63,7 +65,7 @@ const AdminAppointments = () => {
         <Loading />
       ) : (
         <section className="user-section">
-          <h3 className="home-sub-heading">All Users</h3>
+          <h3 className="home-sub-heading">All Appointments</h3>
           {appointments.length > 0 ? (
             <div className="user-container">
               <table>
@@ -77,7 +79,7 @@ const AdminAppointments = () => {
                     <th>Booking Date</th>
                     <th>Booking Time</th>
                     <th>Status</th>
-
+                    <th>Doctor Note</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -98,7 +100,34 @@ const AdminAppointments = () => {
                         <td>{ele?.time}</td>
                         <td>{ele?.createdAt.split("T")[0]}</td>
                         <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td>
-                        <td>{ele?.status}</td>
+                        <td>
+                          <span
+                            className={`status-pill ${
+                              ele?.status === "Completed" ? "completed" : ""
+                            }`}
+                          >
+                            {ele?.status}
+                          </span>
+                        </td>
+                        <td>
+                          {ele?.status === "Completed" ? (
+                            <span className="doctor-note">
+                              {ele?.doctorNote || "No note added"}
+                            </span>
+                          ) : (
+                            <textarea
+                              className="note-input"
+                              placeholder="Completion note"
+                              value={notes[ele?._id] || ""}
+                              onChange={(event) =>
+                                setNotes({
+                                  ...notes,
+                                  [ele?._id]: event.target.value,
+                                })
+                              }
+                            />
+                          )}
+                        </td>
                         <td>
                           <button
                             className={`btn user-btn accept-btn ${

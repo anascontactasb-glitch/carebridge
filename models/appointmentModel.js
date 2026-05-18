@@ -1,3 +1,6 @@
+if (!process.env.MONGO_URI) {
+  module.exports = require("../db/localStore").Appointment;
+} else {
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
@@ -24,6 +27,14 @@ const schema = mongoose.Schema(
       type: String,
       default: "Pending",
     },
+    reminder: {
+      type: Boolean,
+      default: false,
+    },
+    doctorNote: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,
@@ -33,3 +44,4 @@ const schema = mongoose.Schema(
 const Appointment = mongoose.model("Appointment", schema);
 
 module.exports = Appointment;
+}

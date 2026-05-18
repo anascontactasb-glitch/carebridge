@@ -2,28 +2,15 @@
 
 .contact-container {
   flex-direction: column;
-  gap: 2rem;
-  width: 40%;
+  gap: 1.4rem;
+  width: min(560px, 100%);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+  padding: 2rem;
 }
 
 .apply-doctor {
-  height: 90vh;
-}
-
-@media (max-width: 1000px) {
-  .contact-container {
-    width: 50%;
-  }
-}
-
-@media (max-width: 600px) {
-  .contact-container {
-    width: 60%;
-  }
-}
-
-@media (max-width: 420px) {
-  .contact-container {
-    width: 70%;
-  }
+  min-height: 90vh;
 }

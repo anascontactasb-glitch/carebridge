@@ -10,7 +10,7 @@ function DoctorApply() {
     specialization: "",
     experience: "",
     fees: "",
-    timing: "Timing",
+    availability: "Weekdays, 09:00-15:00",
   });
 
   const inputChange = (e) => {
@@ -24,9 +24,9 @@ function DoctorApply() {
   const formSubmit = async (e) => {
     try {
       e.preventDefault();
-      const { specialization, experience, fees, timing } = formDetails;
+      const { specialization, experience, fees, availability } = formDetails;
 
-      if (!specialization || !experience || !fees || !timing) {
+      if (!specialization || !experience || !fees || !availability) {
         return toast.error("Input field should not be empty");
       }
       const { data } = await toast.promise(
@@ -37,7 +37,7 @@ function DoctorApply() {
             specialization,
             experience,
             fees,
-            timing,
+            availability,
           },
           {
             headers: {
@@ -88,17 +88,16 @@ function DoctorApply() {
             defaultChecked="Timings"
           />
           <select
-            name="timing"
-            value={formDetails.timing}
+            name="availability"
+            value={formDetails.availability}
             className="form-input"
-            id="timing"
+            id="availability"
             onChange={inputChange}
           >
-            <option disabled>Timings</option>
-            <option value="morning">Morning</option>
-            <option value="afternoon">Afternoon</option>
-            <option value="evening">Evening</option>
-            <option value="night">Night</option>
+            <option value="Weekdays, 09:00-15:00">Weekdays, 09:00-15:00</option>
+            <option value="Weekdays, 15:00-20:00">Weekdays, 15:00-20:00</option>
+            <option value="Weekends, 10:00-14:00">Weekends, 10:00-14:00</option>
+            <option value="Flexible after confirmation">Flexible after confirmation</option>
           </select>
           <button type="submit" className="btn form-btn">
             apply

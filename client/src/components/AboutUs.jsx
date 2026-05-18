@@ -10,18 +10,16 @@ const AboutUs = () => {
           <div className="hero-img">
             <img
               src={image}
-              alt="hero"
+              alt="Healthcare team"
             />
           </div>
           <div className="hero-content">
+            <h3>Built for a clear healthcare workflow</h3>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Quibusdam tenetur doloremque molestias repellat minus asperiores
-              in aperiam dolor, quaerat praesentium. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Voluptatibus, repudiandae! Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Provident
-              quibusdam doloremque ex? Officia atque ab dolore? Tempore totam
-              non ea!
+              Patients can discover doctors and book appointments. Doctors can
+              receive appointment requests and mark visits as completed. Admins
+              can review doctor applications, manage users, and keep the
+              platform organized.
             </p>
           </div>
         </div>

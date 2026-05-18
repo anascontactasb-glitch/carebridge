@@ -10,6 +10,7 @@ const notificationRouter = require("./routes/notificationRouter");
 
 const app = express();
 const port = process.env.PORT || 5000;
+process.env.JWT_SECRET = process.env.JWT_SECRET || "carebridge-local-secret";
 
 app.use(cors());
 app.use(express.json());

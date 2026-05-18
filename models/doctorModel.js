@@ -1,3 +1,6 @@
+if (!process.env.MONGO_URI) {
+  module.exports = require("../db/localStore").Doctor;
+} else {
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
@@ -19,6 +22,10 @@ const schema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    availability: {
+      type: String,
+      default: "Weekdays",
+    },
     isDoctor: {
       type: Boolean,
       default: false,
@@ -32,3 +39,4 @@ const schema = mongoose.Schema(
 const Doctor = mongoose.model("Doctor", schema);
 
 module.exports = Doctor;
+}

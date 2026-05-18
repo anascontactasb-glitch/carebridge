@@ -2,14 +2,20 @@
 
 .apply-doctor-section {
   margin: 0 auto;
-  width: 30%;
+  width: min(520px, 100%);
 }
 
 .apply-doctor-container {
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.4rem;
   width: 100%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
 }
+
 option {
   text-transform: capitalize;
 }

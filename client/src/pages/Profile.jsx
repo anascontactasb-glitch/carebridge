@@ -7,11 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading";
 import fetchData from "../helper/apiCall";
 import jwt_decode from "jwt-decode";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 function Profile() {
   const { userId } = jwt_decode(localStorage.getItem("token"));
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
   const [file, setFile] = useState("");
@@ -121,7 +124,17 @@ function Profile() {
       ) : (
         <section className="register-section flex-center">
           <div className="profile-container flex-center">
-            <h2 className="form-heading">Profile</h2>
+            <div className="profile-header">
+              <button
+                className="back-btn"
+                type="button"
+                onClick={() => navigate(-1)}
+              >
+                <FaArrowLeft />
+                Back
+              </button>
+              <h2 className="form-heading">Profile</h2>
+            </div>
             <img
               src={file}
               alt="profile"

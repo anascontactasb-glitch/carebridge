@@ -17,5 +17,6 @@ appointRouter.post(
 );
 
 appointRouter.put("/completed", auth, appointmentController.completed);
+appointRouter.put("/reminder", auth, appointmentController.updateReminder);
 
 module.exports = appointRouter;

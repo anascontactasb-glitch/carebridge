@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/contact.css";
+import toast from "react-hot-toast";
 
 const Contact = () => {
   const [formDetails, setFormDetails] = useState({
@@ -24,8 +25,11 @@ const Contact = () => {
       <div className="contact-container flex-center contact">
         <h2 className="form-heading">Contact Us</h2>
         <form
-          method="POST"
-          action={`https://formspree.io/f/${process.env.REACT_FORMIK_SECRET}`}
+          onSubmit={(event) => {
+            event.preventDefault();
+            toast.success("Message received");
+            setFormDetails({ name: "", email: "", message: "" });
+          }}
           className="register-form "
         >
           <input

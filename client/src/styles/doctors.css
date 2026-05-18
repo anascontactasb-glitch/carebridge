@@ -4,10 +4,35 @@
   margin-bottom: 5rem;
 }
 
-.doctors-card-container {
+.doctor-search {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 3rem;
+  align-items: center;
+  gap: 0.7rem;
+  width: min(640px, 100%);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--soft-shadow);
+}
+
+.doctor-search svg {
+  color: var(--dark-blue);
+}
+
+.doctor-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  background: transparent;
+  color: var(--bold-text-color);
+}
+
+.doctors-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
   width: 100%;
 }

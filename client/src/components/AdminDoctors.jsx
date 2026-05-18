@@ -75,6 +75,7 @@ const AdminDoctors = () => {
                     <th>Mobile No.</th>
                     <th>Experience</th>
                     <th>Specialization</th>
+                    <th>Availability</th>
                     <th>Fees</th>
                     <th>Remove</th>
                   </tr>
@@ -97,6 +98,7 @@ const AdminDoctors = () => {
                         <td>{ele?.userId?.mobile}</td>
                         <td>{ele?.experience}</td>
                         <td>{ele?.specialization}</td>
+                        <td>{ele?.availability || "On request"}</td>
                         <td>{ele?.fees}</td>
                         <td className="select">
                           <button

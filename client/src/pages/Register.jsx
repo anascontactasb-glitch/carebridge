@@ -51,7 +51,6 @@ function Register() {
       e.preventDefault();
 
       if (loading) return;
-      if (file === "") return;
 
       const { firstname, lastname, email, password, confpassword } =
         formDetails;
@@ -73,7 +72,9 @@ function Register() {
           lastname,
           email,
           password,
-          pic: file,
+          pic:
+            file ||
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
         }),
         {
           pending: "Registering user...",

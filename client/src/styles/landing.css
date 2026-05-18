@@ -1,0 +1,250 @@
+@import url(app.css);
+
+.trust-strip {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: 1.5fr repeat(4, auto);
+  align-items: center;
+  gap: 1rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--soft-shadow);
+}
+
+.trust-strip span {
+  color: var(--light-text-color);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.trust-strip strong {
+  color: var(--bold-text-color);
+  font-size: 0.88rem;
+}
+
+.landing-section {
+  width: min(1120px, calc(100% - 40px));
+  margin: 5rem auto;
+}
+
+.section-heading {
+  width: min(720px, 100%);
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.section-heading h2,
+.showcase-copy h2,
+.credibility-section h2 {
+  font-size: clamp(1.85rem, 3vw, 2.8rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.section-heading p,
+.showcase-copy p,
+.credibility-section p {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.section-heading.compact {
+  margin-bottom: 1.4rem;
+}
+
+.workflow-grid,
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.workflow-card,
+.role-grid article {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.35rem;
+  box-shadow: var(--soft-shadow);
+}
+
+.workflow-icon,
+.role-grid svg {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background: var(--dark-blue);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.workflow-card h3,
+.role-grid h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.55rem;
+}
+
+.workflow-card p,
+.role-grid p {
+  line-height: 1.7;
+}
+
+.split-showcase {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 1.5rem;
+  align-items: center;
+  background: #12313b;
+  border-radius: 18px;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.split-showcase h2,
+.split-showcase p {
+  color: var(--white);
+}
+
+.split-showcase p {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.feature-list span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.feature-list svg {
+  color: var(--warning);
+}
+
+.showcase-panel {
+  background: var(--white);
+  color: var(--bold-text-color);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+}
+
+.panel-top,
+.queue-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-top {
+  border-bottom: 1px solid var(--line);
+  padding: 0.35rem 0.25rem 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.panel-top span {
+  color: var(--light-text-color);
+  font-weight: 700;
+}
+
+.queue-row {
+  justify-content: flex-start;
+  gap: 0.85rem;
+  padding: 0.95rem 0.7rem;
+  border-radius: var(--radius);
+}
+
+.queue-row.active {
+  background: var(--muted-surface);
+}
+
+.queue-row svg {
+  color: var(--dark-blue);
+  font-size: 1.25rem;
+}
+
+.queue-row div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.queue-row span {
+  color: var(--light-text-color);
+  font-size: 0.9rem;
+}
+
+.role-section {
+  margin-top: 6rem;
+}
+
+.credibility-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: clamp(1.5rem, 4vw, 2.6rem);
+  box-shadow: var(--soft-shadow);
+}
+
+.credibility-section > div {
+  max-width: 720px;
+}
+
+.credibility-section svg {
+  color: var(--dark-blue);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 900px) {
+  .trust-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-strip span {
+    grid-column: 1 / -1;
+  }
+
+  .workflow-grid,
+  .role-grid,
+  .split-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .credibility-section {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .trust-strip,
+  .landing-section {
+    width: min(100% - 28px, 1120px);
+  }
+
+  .trust-strip,
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}

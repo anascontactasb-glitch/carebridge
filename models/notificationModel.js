@@ -1,3 +1,6 @@
+if (!process.env.MONGO_URI) {
+  module.exports = require("../db/localStore").Notification;
+} else {
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
@@ -24,3 +27,4 @@ const schema = mongoose.Schema(
 const Notification = mongoose.model("Notification", schema);
 
 module.exports = Notification;
+}

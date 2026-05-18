@@ -8,9 +8,11 @@ import Loading from "../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../redux/reducers/rootSlice";
 import Empty from "../components/Empty";
+import { FaSearch } from "react-icons/fa";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
 
@@ -25,6 +27,13 @@ const Doctors = () => {
     fetchAllDocs();
   }, []);
 
+  const filteredDoctors = doctors.filter((doctor) => {
+    const content = `${doctor?.userId?.firstname || ""} ${
+      doctor?.userId?.lastname || ""
+    } ${doctor?.specialization || ""}`.toLowerCase();
+    return content.includes(search.toLowerCase());
+  });
+
   return (
     <>
       <Navbar />
@@ -32,9 +41,17 @@ const Doctors = () => {
       {!loading && (
         <section className="container doctors">
           <h2 className="page-heading">Our Doctors</h2>
-          {doctors.length > 0 ? (
+          <div className="doctor-search">
+            <FaSearch />
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Search by doctor name or specialty"
+            />
+          </div>
+          {filteredDoctors.length > 0 ? (
             <div className="doctors-card-container">
-              {doctors.map((ele) => {
+              {filteredDoctors.map((ele) => {
                 return (
                   <DoctorCard
                     ele={ele}

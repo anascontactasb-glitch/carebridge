@@ -14,6 +14,7 @@ const ApplyDoctor = () => {
     specialization: "",
     experience: "",
     fees: "",
+    availability: "Weekdays, 09:00-15:00",
   });
 
   const inputChange = (e) => {
@@ -86,6 +87,17 @@ const ApplyDoctor = () => {
               value={formDetails.fees}
               onChange={inputChange}
             />
+            <select
+              name="availability"
+              value={formDetails.availability}
+              className="form-input"
+              onChange={inputChange}
+            >
+              <option value="Weekdays, 09:00-15:00">Weekdays, 09:00-15:00</option>
+              <option value="Weekdays, 15:00-20:00">Weekdays, 15:00-20:00</option>
+              <option value="Weekends, 10:00-14:00">Weekends, 10:00-14:00</option>
+              <option value="Flexible after confirmation">Flexible after confirmation</option>
+            </select>
             <button
               type="submit"
               className="btn form-btn"

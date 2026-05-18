@@ -11,7 +11,7 @@ const auth = (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    return error;
+    return res.status(401).send("Authorization required");
   }
 };
 

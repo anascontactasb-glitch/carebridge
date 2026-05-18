@@ -1,11 +1,12 @@
 import "../styles/doctorcard.css";
 import React, { useState } from "react";
+import { FaClock } from "react-icons/fa";
 import BookAppointment from "../components/BookAppointment";
 import { toast } from "react-hot-toast";
 
 const DoctorCard = ({ ele }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  const [token] = useState(localStorage.getItem("token") || "");
 
   const handleModal = () => {
     if (token === "") {
@@ -39,6 +40,10 @@ const DoctorCard = ({ ele }) => {
       <p className="fees">
         <strong>Fees per consultation: </strong>$ {ele?.fees}
       </p>
+      <div className="availability-label">
+        <FaClock />
+        <span>{ele?.availability || "Availability on request"}</span>
+      </div>
       <p className="phone">
         <strong>Phone: </strong>
         {ele?.userId?.mobile}

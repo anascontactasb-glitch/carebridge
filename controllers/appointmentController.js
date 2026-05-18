@@ -26,6 +26,9 @@ const bookappointment = async (req, res) => {
       time: req.body.time,
       doctorId: req.body.doctorId,
       userId: req.locals,
+      status: "Pending",
+      reminder: false,
+      doctorNote: "",
     });
 
     const usernotification = Notification({
@@ -54,9 +57,10 @@ const bookappointment = async (req, res) => {
 
 const completed = async (req, res) => {
   try {
+    const doctorNote = (req.body.doctorNote || "").trim();
     const alreadyFound = await Appointment.findOneAndUpdate(
       { _id: req.body.appointid },
-      { status: "Completed" }
+      { status: "Completed", doctorNote }
     );
 
     const usernotification = Notification({
@@ -81,8 +85,21 @@ const completed = async (req, res) => {
   }
 };
 
+const updateReminder = async (req, res) => {
+  try {
+    await Appointment.findOneAndUpdate(
+      { _id: req.body.appointid },
+      { reminder: Boolean(req.body.reminder) }
+    );
+    return res.status(201).send("Reminder updated");
+  } catch (error) {
+    res.status(500).send("Unable to update reminder");
+  }
+};
+
 module.exports = {
   getallappointments,
   bookappointment,
   completed,
+  updateReminder,
 };

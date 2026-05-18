@@ -5,8 +5,9 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import getApiBaseUrl from "../helper/apiBase";
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN || "/api";
+axios.defaults.baseURL = getApiBaseUrl();
 
 const ApplyDoctor = () => {
   const navigate = useNavigate();

@@ -7,8 +7,9 @@ import { useDispatch } from "react-redux";
 import { setUserInfo } from "../redux/reducers/rootSlice";
 import jwt_decode from "jwt-decode";
 import fetchData from "../helper/apiCall";
+import getApiBaseUrl from "../helper/apiBase";
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN || "/api";
+axios.defaults.baseURL = getApiBaseUrl();
 
 function Login() {
   const dispatch = useDispatch();

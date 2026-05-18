@@ -6,8 +6,9 @@ import { setLoading } from "../redux/reducers/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Empty from "./Empty";
 import fetchData from "../helper/apiCall";
+import getApiBaseUrl from "../helper/apiBase";
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN || "/api";
+axios.defaults.baseURL = getApiBaseUrl();
 
 const Users = () => {
   const [users, setUsers] = useState([]);

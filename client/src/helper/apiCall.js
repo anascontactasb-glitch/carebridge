@@ -1,6 +1,7 @@
 import axios from "axios";
+import getApiBaseUrl from "./apiBase";
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN || "/api";
+axios.defaults.baseURL = getApiBaseUrl();
 
 const fetchData = async (url) => {
   const { data } = await axios.get(url, {

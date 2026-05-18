@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import "../styles/doctorapply.css";
 import axios from "axios";
+import getApiBaseUrl from "../helper/apiBase";
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN || "/api";
+axios.defaults.baseURL = getApiBaseUrl();
 
 function DoctorApply() {
   const [formDetails, setFormDetails] = useState({

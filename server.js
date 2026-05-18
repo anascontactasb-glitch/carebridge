@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-require("./db/conn");
+const dbReady = require("./db/conn");
 const userRouter = require("./routes/userRoutes");
 const doctorRouter = require("./routes/doctorRoutes");
 const appointRouter = require("./routes/appointRoutes");
@@ -14,6 +14,14 @@ process.env.JWT_SECRET = process.env.JWT_SECRET || "carebridge-local-secret";
 
 app.use(cors());
 app.use(express.json());
+app.use(async (req, res, next) => {
+  try {
+    await dbReady;
+    next();
+  } catch (error) {
+    res.status(500).send("Database initialization failed");
+  }
+});
 app.use("/api/user", userRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/appointment", appointRouter);

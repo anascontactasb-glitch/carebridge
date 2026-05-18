@@ -4,9 +4,10 @@ require("dotenv").config();
 
 if (!process.env.MONGO_URI) {
   const { seedLocalData } = require("./localStore");
-  seedLocalData();
-  console.log("Using seeded local in-memory database");
-  module.exports = Promise.resolve();
+  const client = seedLocalData().then(() => {
+    console.log("Using seeded local in-memory database");
+  });
+  module.exports = client;
 } else {
   const client = mongoose
     .connect(process.env.MONGO_URI, {

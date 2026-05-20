@@ -22,6 +22,14 @@ Patients can browse doctors, book appointments, manage reminders, read notificat
 
 ![CareBridge doctors directory](docs/screenshots/doctors.png)
 
+## Next Feature: Remote Doctor Consultation
+
+This feature is currently under development and has not been pushed into the working application yet.
+
+The next planned CareBridge feature is a remote consultation room where a patient can talk with a doctor without visiting the clinic. The goal is to support chat, voice calls, video calls, shared medical files, and prescriptions written by the doctor during the consultation. Consultation history, uploaded files, and prescribed medicines should stay saved in the patient's appointment record so both the patient and doctor can review them later.
+
+![Remote consultation feature preview](docs/roadmap/remote-consultation-preview.jpeg)
+
 ## Features
 
 - Patient registration and login

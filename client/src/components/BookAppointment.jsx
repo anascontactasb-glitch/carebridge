@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import "../styles/bookappointment.css";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -9,6 +10,24 @@ const BookAppointment = ({ setModalOpen, ele }) => {
     date: "",
     time: "",
   });
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setModalOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [setModalOpen]);
 
   const inputChange = (e) => {
     const { name, value } = e.target;
@@ -48,45 +67,63 @@ const BookAppointment = ({ setModalOpen, ele }) => {
     }
   };
 
-  return (
-    <>
-      <div className="modal flex-center">
-        <div className="modal__content">
-          <h2 className="page-heading">Book Appointment</h2>
-          <IoMdClose
-            onClick={() => {
-              setModalOpen(false);
-            }}
-            className="close-btn"
-          />
-          <div className="register-container flex-center book">
-            <form className="register-form">
-              <input
-                type="date"
-                name="date"
-                className="form-input"
-                value={formDetails.date}
-                onChange={inputChange}
-              />
-              <input
-                type="time"
-                name="time"
-                className="form-input"
-                value={formDetails.time}
-                onChange={inputChange}
-              />
-              <button
-                type="submit"
-                className="btn form-btn"
-                onClick={bookAppointment}
-              >
-                book
-              </button>
-            </form>
-          </div>
+  return createPortal(
+    <div
+      className="modal"
+      onMouseDown={() => setModalOpen(false)}
+      role="presentation"
+    >
+      <div
+        className="modal__content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="book-appointment-title"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <h2
+          className="page-heading"
+          id="book-appointment-title"
+        >
+          Book Appointment
+        </h2>
+        <button
+          type="button"
+          aria-label="Close booking form"
+          onClick={() => {
+            setModalOpen(false);
+          }}
+          className="close-btn"
+        >
+          <IoMdClose />
+        </button>
+        <div className="register-container flex-center book">
+          <form className="register-form">
+            <input
+              type="date"
+              name="date"
+              className="form-input"
+              value={formDetails.date}
+              onChange={inputChange}
+            />
+            <input
+              type="time"
+              name="time"
+              className="form-input"
+              value={formDetails.time}
+              onChange={inputChange}
+            />
+            <button
+              type="submit"
+              className="btn form-btn"
+              onClick={bookAppointment}
+            >
+              book
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </div>,
+    document.body
   );
 };
 
